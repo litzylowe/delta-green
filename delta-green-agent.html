@@ -1,0 +1,1589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DELTA GREEN // AGENT DOCUMENTATION SHEET</title>
+<style>
+  /* ===== FONTS & BASE ===== */
+  @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Share+Tech+Mono&display=swap');
+
+  :root {
+    --paper: #e8e0d0;
+    --paper-dark: #d4c9b0;
+    --ink: #1a1a1a;
+    --ink-faded: #3a3530;
+    --green: #2d4a1e;
+    --green-light: #3d6129;
+    --red-stamp: #8b1a1a;
+    --border: #4a3f2f;
+    --field-bg: #f0e8d8;
+    --field-border: #6b5c3e;
+    --accent: #5c4a1e;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: #2a2a2a;
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  /* ===== TOOLBAR ===== */
+  #toolbar {
+    max-width: 960px;
+    margin: 0 auto 12px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #toolbar .toolbar-left { display: flex; gap: 10px; flex-wrap: wrap; }
+  #toolbar .toolbar-right { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    padding: 8px 16px;
+    border: 2px solid;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-weight: bold;
+  }
+
+  .btn-primary {
+    background: var(--green);
+    color: #d0e8c0;
+    border-color: var(--green-light);
+  }
+  .btn-primary:hover { background: var(--green-light); }
+
+  .btn-danger {
+    background: #3d1a1a;
+    color: #e8c0c0;
+    border-color: #6b2a2a;
+  }
+  .btn-danger:hover { background: #5c2020; }
+
+  .btn-neutral {
+    background: #2a2520;
+    color: #c8bfa8;
+    border-color: #4a3f2f;
+  }
+  .btn-neutral:hover { background: #3a3028; }
+
+  .btn-share {
+    background: #1a2d3d;
+    color: #a0c8e8;
+    border-color: #2a4a6b;
+  }
+  .btn-share:hover { background: #1e3a52; }
+
+  /* ===== DOCUMENT WRAPPER ===== */
+  #document {
+    max-width: 960px;
+    margin: 0 auto;
+    background: var(--paper);
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8), inset 0 0 60px rgba(0,0,0,0.05);
+    border: 1px solid #8b7355;
+  }
+
+  /* Paper texture */
+  #document::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(0,0,0,0.04) 27px, rgba(0,0,0,0.04) 28px);
+    pointer-events: none;
+  }
+
+  /* ===== HEADER ===== */
+  .doc-header {
+    text-align: center;
+    border-bottom: 3px double var(--border);
+    padding-bottom: 14px;
+    margin-bottom: 14px;
+    position: relative;
+  }
+
+  .classification-bar {
+    background: var(--ink);
+    color: #e0d0b0;
+    font-size: 10px;
+    letter-spacing: 3px;
+    padding: 4px 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+  }
+
+  .doc-title-main {
+    font-family: 'Special Elite', serif;
+    font-size: 26px;
+    letter-spacing: 4px;
+    color: var(--ink);
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+
+  .doc-title-sub {
+    font-size: 10px;
+    letter-spacing: 3px;
+    color: var(--ink-faded);
+    margin-top: 4px;
+  }
+
+  .form-number {
+    position: absolute;
+    right: 0;
+    top: 30px;
+    font-size: 10px;
+    color: var(--ink-faded);
+    text-align: right;
+    line-height: 1.6;
+  }
+
+  /* ===== TOP SECRET STAMP ===== */
+  .stamp-topsecret {
+    display: inline-block;
+    border: 3px solid var(--red-stamp);
+    color: var(--red-stamp);
+    font-family: 'Special Elite', serif;
+    font-size: 14px;
+    letter-spacing: 3px;
+    padding: 3px 10px;
+    transform: rotate(-3deg);
+    opacity: 0.75;
+    margin: 6px 0;
+    text-transform: uppercase;
+  }
+
+  /* ===== SECTION LAYOUT ===== */
+  .section {
+    margin-bottom: 10px;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+
+  .section-label {
+    background: var(--ink);
+    color: #c8b890;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 2px 8px;
+    text-transform: uppercase;
+    display: inline-block;
+  }
+
+  .section-label-side {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    background: var(--ink);
+    color: #c8b890;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    padding: 8px 3px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .section-body {
+    padding: 8px;
+  }
+
+  /* ===== GRID LAYOUTS ===== */
+  .row { display: flex; gap: 0; }
+  .col { flex: 1; }
+
+  /* ===== FIELD ===== */
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    padding: 4px 6px;
+    border-right: 1px solid var(--field-border);
+    border-bottom: 1px solid var(--field-border);
+  }
+  .field-group:last-child { border-right: none; }
+
+  .field-label {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2px;
+    font-weight: bold;
+  }
+
+  .field-input {
+    font-family: 'Special Elite', serif;
+    font-size: 13px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--field-border);
+    color: var(--ink);
+    width: 100%;
+    padding: 2px 2px 2px 0;
+    outline: none;
+    min-height: 22px;
+  }
+  .field-input:focus { border-bottom-color: var(--green); background: rgba(45,74,30,0.06); }
+
+  textarea.field-input {
+    resize: vertical;
+    min-height: 48px;
+    border: 1px solid var(--field-border);
+    padding: 4px;
+    line-height: 1.5;
+  }
+  textarea.field-input:focus { border-color: var(--green); }
+
+  select.field-input {
+    cursor: pointer;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%234a3f2f'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    padding-right: 20px;
+  }
+
+  /* ===== STATISTICS TABLE ===== */
+  .stats-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .stats-table th {
+    background: var(--ink);
+    color: #c8b890;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    padding: 4px 6px;
+    text-align: center;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+  .stats-table td {
+    border: 1px solid var(--field-border);
+    padding: 3px 5px;
+    vertical-align: middle;
+  }
+  .stats-table .stat-name {
+    font-size: 10px;
+    letter-spacing: 1px;
+    color: var(--accent);
+    text-transform: uppercase;
+    white-space: nowrap;
+    font-weight: bold;
+  }
+  .stats-table input[type="number"] {
+    font-family: 'Special Elite', serif;
+    font-size: 16px;
+    width: 52px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--field-border);
+    color: var(--ink);
+    outline: none;
+    padding: 2px 0;
+  }
+  .stats-table input[type="number"]:focus { border-bottom-color: var(--green); }
+  .stat-x5 {
+    font-family: 'Special Elite', serif;
+    font-size: 14px;
+    width: 40px;
+    text-align: center;
+    color: var(--green);
+    font-weight: bold;
+    display: inline-block;
+  }
+
+  /* ===== DERIVED ATTRIBUTES ===== */
+  .derived-table { width: 100%; border-collapse: collapse; }
+  .derived-table th {
+    background: var(--ink);
+    color: #c8b890;
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    padding: 3px 6px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: normal;
+  }
+  .derived-table td {
+    border: 1px solid var(--field-border);
+    padding: 4px 6px;
+    text-align: center;
+    vertical-align: middle;
+  }
+  .derived-table .attr-name {
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: bold;
+    text-align: left;
+  }
+  .derived-table input[type="number"] {
+    font-family: 'Special Elite', serif;
+    font-size: 18px;
+    width: 52px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--field-border);
+    color: var(--ink);
+    outline: none;
+    padding: 2px 0;
+  }
+  .derived-table input[type="number"]:focus { border-bottom-color: var(--green); }
+  .derived-table .max-val {
+    font-family: 'Special Elite', serif;
+    font-size: 14px;
+    color: var(--ink-faded);
+    width: 40px;
+    text-align: center;
+    display: inline-block;
+  }
+
+  /* ===== SKILLS ===== */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    font-size: 11px;
+  }
+
+  .skill-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 2px 5px;
+    border-bottom: 1px solid rgba(74,63,47,0.3);
+    border-right: 1px solid rgba(74,63,47,0.3);
+  }
+
+  .skill-check {
+    width: 13px;
+    height: 13px;
+    border: 1px solid var(--field-border);
+    border-radius: 2px;
+    cursor: pointer;
+    flex-shrink: 0;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    position: relative;
+  }
+  .skill-check:checked {
+    background: var(--ink);
+  }
+  .skill-check:checked::after {
+    content: '✓';
+    position: absolute;
+    top: -2px;
+    left: 1px;
+    font-size: 10px;
+    color: var(--paper);
+  }
+
+  .skill-name {
+    flex: 1;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faded);
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .skill-base {
+    font-size: 9px;
+    color: #8b7355;
+    flex-shrink: 0;
+  }
+
+  .skill-val {
+    font-family: 'Special Elite', serif;
+    font-size: 13px;
+    width: 36px;
+    text-align: right;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--field-border);
+    color: var(--green-light);
+    font-weight: bold;
+    outline: none;
+    padding: 0 2px 0 0;
+    flex-shrink: 0;
+  }
+  .skill-val:focus { border-bottom-color: var(--green); }
+
+  .skill-pct {
+    font-size: 9px;
+    color: #8b7355;
+    flex-shrink: 0;
+  }
+
+  /* ===== BONDS ===== */
+  .bond-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px;
+    border-bottom: 1px solid var(--field-border);
+  }
+  .bond-row:last-child { border-bottom: none; }
+  .bond-num {
+    font-size: 9px;
+    color: var(--accent);
+    width: 16px;
+    flex-shrink: 0;
+    font-weight: bold;
+  }
+  .bond-name {
+    flex: 1;
+    font-family: 'Special Elite', serif;
+    font-size: 13px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--field-border);
+    color: var(--ink);
+    outline: none;
+    padding: 2px 2px 2px 0;
+    min-height: 22px;
+  }
+  .bond-name:focus { border-bottom-color: var(--green); }
+  .bond-score-label {
+    font-size: 9px;
+    color: var(--accent);
+    flex-shrink: 0;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  .bond-score {
+    font-family: 'Special Elite', serif;
+    font-size: 18px;
+    width: 44px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--field-border);
+    color: var(--ink);
+    outline: none;
+    flex-shrink: 0;
+  }
+  .bond-score:focus { border-bottom-color: var(--green); }
+
+  /* ===== MOTIVATIONS ===== */
+  .motivation-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    padding: 3px 6px;
+    border-bottom: 1px solid rgba(74,63,47,0.4);
+  }
+  .motivation-row:last-child { border-bottom: none; }
+  .motivation-bullet {
+    font-size: 10px;
+    color: var(--accent);
+    margin-top: 4px;
+    flex-shrink: 0;
+  }
+  .motivation-input {
+    flex: 1;
+    font-family: 'Special Elite', serif;
+    font-size: 12px;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(74,63,47,0.4);
+    color: var(--ink);
+    outline: none;
+    padding: 2px 2px 2px 0;
+    min-height: 20px;
+    width: 100%;
+  }
+  .motivation-input:focus { border-bottom-color: var(--green); }
+  .motivation-tag {
+    font-size: 8px;
+    color: #8b7355;
+    white-space: nowrap;
+    flex-shrink: 0;
+    margin-top: 5px;
+    font-style: italic;
+  }
+
+  /* ===== SAN LOSS CHECKBOXES ===== */
+  .san-track {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 8px;
+    border-bottom: 1px solid var(--field-border);
+  }
+  .san-track:last-child { border-bottom: none; }
+  .san-track-label {
+    font-size: 9px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: bold;
+    width: 90px;
+    flex-shrink: 0;
+  }
+  .san-boxes {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+  }
+  .san-box {
+    width: 18px;
+    height: 18px;
+    border: 1.5px solid var(--field-border);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .san-box:checked { background: var(--red-stamp); border-color: var(--red-stamp); }
+  .san-box:checked::after {
+    content: '✗';
+    position: absolute;
+    top: -3px;
+    left: 1px;
+    font-size: 14px;
+    color: var(--paper);
+  }
+  .san-adapted-label {
+    font-size: 8px;
+    color: #8b7355;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-left: 4px;
+  }
+  .san-adapted-box {
+    width: 16px;
+    height: 16px;
+    border: 1.5px solid var(--field-border);
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    background: transparent;
+    position: relative;
+    flex-shrink: 0;
+  }
+  .san-adapted-box:checked { background: var(--accent); border-color: var(--accent); }
+  .san-adapted-box:checked::after {
+    content: '✓';
+    position: absolute;
+    top: -3px;
+    left: 1px;
+    font-size: 12px;
+    color: var(--paper);
+  }
+
+  /* ===== WEAPONS TABLE ===== */
+  .weapons-table { width: 100%; border-collapse: collapse; font-size: 11px; }
+  .weapons-table th {
+    background: var(--ink);
+    color: #c8b890;
+    font-size: 8px;
+    letter-spacing: 1px;
+    padding: 3px 4px;
+    text-align: center;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+  .weapons-table td {
+    border: 1px solid var(--field-border);
+    padding: 2px 3px;
+  }
+  .weapons-table input {
+    font-family: 'Special Elite', serif;
+    font-size: 11px;
+    background: transparent;
+    border: none;
+    color: var(--ink);
+    outline: none;
+    width: 100%;
+    padding: 2px 0;
+  }
+  .weapons-table input:focus { background: rgba(45,74,30,0.06); }
+
+  /* ===== SPECIAL TRAINING ===== */
+  .training-table { width: 100%; border-collapse: collapse; }
+  .training-table th {
+    background: var(--ink);
+    color: #c8b890;
+    font-size: 8px;
+    letter-spacing: 1px;
+    padding: 3px 6px;
+    text-align: left;
+    font-weight: normal;
+    text-transform: uppercase;
+  }
+  .training-table td {
+    border: 1px solid var(--field-border);
+    padding: 3px 5px;
+  }
+  .training-table input {
+    font-family: 'Special Elite', serif;
+    font-size: 12px;
+    background: transparent;
+    border: none;
+    color: var(--ink);
+    outline: none;
+    width: 100%;
+  }
+
+  /* ===== FOOTER ===== */
+  .doc-footer {
+    border-top: 2px solid var(--border);
+    padding-top: 8px;
+    margin-top: 10px;
+  }
+  .footer-sig {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 8px;
+  }
+  .sig-line {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .sig-label {
+    font-size: 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .sig-input {
+    font-family: 'Special Elite', serif;
+    font-size: 14px;
+    background: transparent;
+    border: none;
+    border-bottom: 1.5px solid var(--border);
+    color: var(--ink);
+    outline: none;
+    padding: 2px 4px;
+    width: 100%;
+  }
+  .sig-input:focus { border-bottom-color: var(--green); }
+
+  /* ===== SECTION HEADER BARS ===== */
+  .sec-bar {
+    display: flex;
+    align-items: center;
+    background: var(--ink);
+    color: #c8b890;
+    font-size: 9px;
+    letter-spacing: 2px;
+    padding: 3px 8px;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+    font-weight: normal;
+    gap: 8px;
+  }
+
+  .sec-bar-num {
+    font-size: 11px;
+    color: #8b7355;
+    font-family: 'Special Elite', serif;
+    min-width: 20px;
+  }
+
+  /* ===== ROLL BUTTON ===== */
+  .roll-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 3px 8px;
+    background: var(--green);
+    color: #d0e8c0;
+    border: 1px solid var(--green-light);
+    cursor: pointer;
+    text-transform: uppercase;
+    margin-left: 8px;
+  }
+  .roll-btn:hover { background: var(--green-light); }
+
+  /* ===== NOTIFICATION ===== */
+  #notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--green);
+    color: #d0e8c0;
+    padding: 10px 18px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1px;
+    border: 1px solid var(--green-light);
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: all 0.3s;
+    pointer-events: none;
+    z-index: 999;
+    max-width: 300px;
+    text-transform: uppercase;
+  }
+  #notification.show { opacity: 1; transform: translateY(0); }
+
+  /* ===== NEW AGENT PROMPT ===== */
+  #new-agent-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+  }
+  #new-agent-overlay.show { display: flex; }
+
+  .overlay-box {
+    background: var(--paper);
+    border: 2px solid var(--border);
+    padding: 30px;
+    max-width: 400px;
+    text-align: center;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .overlay-box h2 {
+    font-family: 'Special Elite', serif;
+    font-size: 18px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .overlay-box p {
+    font-size: 11px;
+    color: var(--ink-faded);
+    margin-bottom: 18px;
+    letter-spacing: 0.5px;
+  }
+  .overlay-btns { display: flex; gap: 10px; justify-content: center; }
+
+  /* ===== UTILITY ===== */
+  .separator { border-top: 1px solid var(--border); margin: 4px 0; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; }
+  .noborder-right { border-right: none !important; }
+  .noborder-bottom { border-bottom: none !important; }
+  .w-auto { width: auto; }
+
+  /* ===== PRINT STYLES ===== */
+  @media print {
+    body { background: white; padding: 0; }
+    #toolbar { display: none; }
+    #document { box-shadow: none; max-width: 100%; border: none; }
+    .btn { display: none; }
+    .roll-btn { display: none; }
+  }
+
+  /* ===== DICE ROLLER ===== */
+  #dice-panel {
+    max-width: 960px;
+    margin: 0 auto 12px;
+    background: #1a1512;
+    border: 1px solid #3a3028;
+    padding: 10px 16px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  #dice-panel .dice-label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #8b7355;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+  #dice-result {
+    font-family: 'Special Elite', serif;
+    font-size: 20px;
+    color: #d4a830;
+    min-width: 50px;
+    text-align: center;
+  }
+  #dice-history {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #5a5040;
+    flex: 1;
+    letter-spacing: 0.5px;
+  }
+</style>
+</head>
+<body>
+
+<!-- NOTIFICATION -->
+<div id="notification"></div>
+
+<!-- NEW AGENT CONFIRM -->
+<div id="new-agent-overlay">
+  <div class="overlay-box">
+    <h2>⚠ New Agent</h2>
+    <p>This will clear all current agent data. This action cannot be undone. Are you sure you want to proceed?</p>
+    <div class="overlay-btns">
+      <button class="btn btn-danger" onclick="confirmNewAgent()">Clear &amp; Start Over</button>
+      <button class="btn btn-neutral" onclick="cancelNewAgent()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOOLBAR -->
+<div id="toolbar">
+  <div class="toolbar-left">
+    <button class="btn btn-primary" onclick="rollAllStats()">⚂ Roll All Stats (3d6)</button>
+    <button class="btn btn-neutral" onclick="rollDice(100)" title="Roll 1d100">Roll d100</button>
+    <button class="btn btn-neutral" onclick="rollDice(20)" title="Roll 1d20">Roll d20</button>
+    <button class="btn btn-neutral" onclick="rollDice(10)" title="Roll 1d10">Roll d10</button>
+    <button class="btn btn-neutral" onclick="rollDice(6)" title="Roll 1d6">Roll d6</button>
+  </div>
+  <div class="toolbar-right">
+    <button class="btn btn-neutral" onclick="promptNewAgent()">↺ New Agent</button>
+    <button class="btn btn-share" onclick="copyShareLink()">⚑ Copy Share Link</button>
+    <button class="btn btn-neutral" onclick="window.print()">⎙ Print</button>
+  </div>
+</div>
+
+<!-- DICE PANEL -->
+<div id="dice-panel">
+  <span class="dice-label">Last Roll:</span>
+  <span id="dice-result">—</span>
+  <span id="dice-history" class="dice-history"></span>
+</div>
+
+<!-- DOCUMENT -->
+<div id="document">
+
+  <!-- CLASSIFICATION HEADER -->
+  <div class="doc-header">
+    <div class="classification-bar">TOP SECRET // ORCON // SPECIAL ACCESS REQUIRED — DELTA GREEN</div>
+    <div class="doc-title-main">Delta Green</div>
+    <div class="doc-title-sub">Agent Documentation Sheet</div>
+    <div style="margin-top:6px;"><span class="stamp-topsecret">Top Secret</span></div>
+    <div class="form-number">
+      UNITED STATES<br>
+      FORM DD 315<br>
+      <span style="color:#8b1a1a;font-weight:bold;">112382</span>
+    </div>
+  </div>
+
+  <!-- SECTION 1-7: PERSONAL DATA -->
+  <div style="border:1px solid var(--border); margin-bottom:2px;">
+    <div class="sec-bar"><span class="sec-bar-num">1–7</span> Personal Data</div>
+    <div style="display:grid; grid-template-columns: 3fr 2fr 1fr 1fr; border-bottom:1px solid var(--field-border);">
+      <div class="field-group">
+        <span class="field-label">1. Last Name, First Name</span>
+        <input type="text" class="field-input" id="agent-name" placeholder="SURNAME, GIVEN NAME" data-save="agent-name">
+      </div>
+      <div class="field-group">
+        <span class="field-label">Alias / Code Name</span>
+        <input type="text" class="field-input" id="agent-alias" placeholder="(if applicable)" data-save="agent-alias">
+      </div>
+      <div class="field-group" style="align-items:center;">
+        <span class="field-label">5. Sex</span>
+        <select class="field-input" id="agent-sex" data-save="agent-sex">
+          <option value="">—</option>
+          <option value="M">M</option>
+          <option value="F">F</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+      <div class="field-group noborder-right">
+        <span class="field-label">6. Age / D.O.B.</span>
+        <input type="text" class="field-input" id="agent-age" placeholder="e.g. 34 / 1990-03-15" data-save="agent-age">
+      </div>
+    </div>
+    <div style="display:grid; grid-template-columns: 2fr 2fr 1fr; border-bottom:1px solid var(--field-border);">
+      <div class="field-group">
+        <span class="field-label">2. Profession (Rank if Applicable)</span>
+        <input type="text" class="field-input" id="agent-profession" placeholder="e.g. Federal Agent, GS-13" data-save="agent-profession">
+      </div>
+      <div class="field-group">
+        <span class="field-label">3. Employer</span>
+        <input type="text" class="field-input" id="agent-employer" placeholder="e.g. FBI, U.S. Army" data-save="agent-employer">
+      </div>
+      <div class="field-group noborder-right">
+        <span class="field-label">4. Nationality</span>
+        <input type="text" class="field-input" id="agent-nationality" placeholder="e.g. American" data-save="agent-nationality">
+      </div>
+    </div>
+    <div class="field-group noborder-right" style="border:none;">
+      <span class="field-label">7. Education and Occupational History</span>
+      <textarea class="field-input" id="agent-education" rows="2" placeholder="Degrees, prior employment, relevant training..." data-save="agent-education"></textarea>
+    </div>
+  </div>
+
+  <!-- STATS + DERIVED + PHYSICAL (side by side) -->
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2px; margin-bottom:2px;">
+
+    <!-- SECTION 8: STATISTICS -->
+    <div style="border:1px solid var(--border);">
+      <div class="sec-bar">
+        <span class="sec-bar-num">8</span> Statistics
+        <button class="roll-btn" onclick="rollAllStats()">⚂ Roll All (3d6)</button>
+      </div>
+      <table class="stats-table">
+        <thead>
+          <tr>
+            <th style="text-align:left; padding-left:6px;">Stat</th>
+            <th>Score</th>
+            <th>×5</th>
+            <th style="width:40%;">Distinguishing Features</th>
+          </tr>
+        </thead>
+        <tbody id="stats-body">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:2px;">
+
+      <!-- SECTION 9: DERIVED ATTRIBUTES -->
+      <div style="border:1px solid var(--border);">
+        <div class="sec-bar"><span class="sec-bar-num">9</span> Derived Attributes</div>
+        <table class="derived-table">
+          <thead>
+            <tr>
+              <th style="text-align:left; padding-left:6px; width:40%;">Attribute</th>
+              <th>Maximum</th>
+              <th>Current</th>
+            </tr>
+          </thead>
+          <tbody id="derived-body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- SECTION 10: PHYSICAL DESCRIPTION -->
+      <div style="border:1px solid var(--border); flex:1;">
+        <div class="sec-bar"><span class="sec-bar-num">10</span> Physical Description</div>
+        <div style="padding:4px 6px;">
+          <textarea class="field-input" id="agent-physical" rows="3" placeholder="Height, weight, build, hair, eyes, distinguishing marks..." data-save="agent-physical"></textarea>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BONDS + MOTIVATIONS + SAN LOSS (side by side) -->
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2px; margin-bottom:2px;">
+
+    <!-- SECTION 11: BONDS -->
+    <div style="border:1px solid var(--border);">
+      <div class="sec-bar"><span class="sec-bar-num">11</span> Bonds</div>
+      <div id="bonds-container">
+        <!-- Populated by JS -->
+      </div>
+    </div>
+
+    <div style="display:flex; flex-direction:column; gap:2px;">
+
+      <!-- SECTION 12: MOTIVATIONS & MENTAL DISORDERS -->
+      <div style="border:1px solid var(--border);">
+        <div class="sec-bar"><span class="sec-bar-num">12</span> Motivations &amp; Mental Disorders</div>
+        <div id="motivations-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+      <!-- SECTION 13: SAN LOSS -->
+      <div style="border:1px solid var(--border);">
+        <div class="sec-bar"><span class="sec-bar-num">13</span> Incidents of SAN Loss Without Going Insane</div>
+        <div id="san-loss-container">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SECTION: APPLICABLE SKILL SETS -->
+  <div style="border:1px solid var(--border); margin-bottom:2px;">
+    <div class="sec-bar">Applicable Skill Sets</div>
+    <div style="padding:4px 6px; font-size:9px; color:#8b7355; letter-spacing:0.5px; border-bottom:1px solid rgba(74,63,47,0.3);">
+      CHECK □ when you attempt a skill and fail. After the session, add 1D4 to each checked skill and erase all checks.
+    </div>
+    <div class="skills-grid" id="skills-grid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+
+  <!-- SECTION 14: WOUNDS & AILMENTS + SECTION 15: ARMOR/GEAR -->
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2px; margin-bottom:2px;">
+
+    <div style="border:1px solid var(--border);">
+      <div class="sec-bar"><span class="sec-bar-num">14</span> Wounds and Ailments</div>
+      <div style="padding:4px 8px; border-bottom:1px solid var(--field-border); font-size:9px; color:#8b7355;">
+        <label style="display:flex; align-items:center; gap:6px; cursor:pointer;">
+          <input type="checkbox" id="first-aid-attempted" data-save="first-aid-attempted">
+          <span>First Aid attempted since last injury?</span>
+        </label>
+        <div style="margin-top:2px; font-size:8px; color:#7a6b55; font-style:italic;">If yes: only Medicine, Surgery, or long-term rest can help further.</div>
+      </div>
+      <div style="padding:4px 6px;">
+        <textarea class="field-input" id="wounds-ailments" rows="4" placeholder="Document injuries, illnesses, and ongoing conditions..." data-save="wounds-ailments"></textarea>
+      </div>
+    </div>
+
+    <div style="border:1px solid var(--border);">
+      <div class="sec-bar"><span class="sec-bar-num">15</span> Armor and Gear</div>
+      <div style="padding:3px 6px; font-size:9px; color:#8b7355; border-bottom:1px solid rgba(74,63,47,0.3);">
+        Body armor reduces damage of all attacks except Called Shots and successful Lethality rolls.
+      </div>
+      <div style="padding:4px 6px;">
+        <textarea class="field-input" id="armor-gear" rows="5" placeholder="List armor, equipment, and significant gear..." data-save="armor-gear"></textarea>
+      </div>
+    </div>
+  </div>
+
+  <!-- SECTION 16: WEAPONS -->
+  <div style="border:1px solid var(--border); margin-bottom:2px;">
+    <div class="sec-bar"><span class="sec-bar-num">16</span> Weapons</div>
+    <table class="weapons-table">
+      <thead>
+        <tr>
+          <th style="width:22%; text-align:left; padding-left:6px;">(a) Weapon / Name</th>
+          <th style="width:9%;">(b) Skill %</th>
+          <th style="width:11%;">(c) Base Range</th>
+          <th style="width:11%;">(d) Damage</th>
+          <th style="width:10%;">(e) Armor Piercing</th>
+          <th style="width:10%;">(f) Lethality %</th>
+          <th style="width:11%;">(g) Kill Radius</th>
+          <th style="width:10%;">Ammo</th>
+          <th style="width:6%;">Notes</th>
+        </tr>
+      </thead>
+      <tbody id="weapons-body">
+        <!-- Populated by JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- SECTION 17-19: NOTES / HOME / TRAINING -->
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap:2px; margin-bottom:2px;">
+
+    <div style="display:flex; flex-direction:column; gap:2px;">
+      <div style="border:1px solid var(--border);">
+        <div class="sec-bar"><span class="sec-bar-num">17</span> Personal Details and Notes</div>
+        <div style="padding:4px 6px;">
+          <textarea class="field-input" id="personal-notes" rows="5" placeholder="Background, contacts, significant relationships, notable events..." data-save="personal-notes"></textarea>
+        </div>
+      </div>
+      <div style="border:1px solid var(--border);">
+        <div class="sec-bar"><span class="sec-bar-num">18</span> Developments Affecting Home and Family</div>
+        <div style="padding:4px 6px;">
+          <textarea class="field-input" id="home-family" rows="4" placeholder="Changes to home life, family status, relationships damaged by Delta Green..." data-save="home-family"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div style="border:1px solid var(--border);">
+      <div class="sec-bar"><span class="sec-bar-num">19</span> Special Training</div>
+      <table class="training-table">
+        <thead>
+          <tr>
+            <th style="width:60%;">Training / Skill</th>
+            <th>Stat / Skill Used</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody id="training-body">
+          <!-- Populated by JS -->
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- RECRUITEMENT NOTE -->
+  <div style="border:1px solid var(--border); margin-bottom:2px;">
+    <div class="sec-bar">Recruitment Notes</div>
+    <div style="padding:4px 8px; font-size:9px; color:#8b7355; border-bottom:1px solid var(--field-border); font-style:italic;">
+      Please indicate why this agent was recruited and why the agent agreed to be recruited.
+    </div>
+    <div style="padding:4px 6px;">
+      <textarea class="field-input" id="recruitment-notes" rows="3" placeholder="Recruitment circumstances and agent's motivations for joining Delta Green..." data-save="recruitment-notes"></textarea>
+    </div>
+  </div>
+
+  <!-- SECTION 20-21: SIGNATURES -->
+  <div class="doc-footer">
+    <div class="footer-sig">
+      <div class="sig-line">
+        <span class="sig-label">20. Authorizing Officer</span>
+        <input type="text" class="sig-input" id="auth-officer" placeholder="Name / Rank / Agency" data-save="auth-officer">
+      </div>
+      <div class="sig-line">
+        <span class="sig-label">21. Agent Signature (Code Name)</span>
+        <input type="text" class="sig-input" id="agent-signature" placeholder="Operational Designation" data-save="agent-signature">
+      </div>
+    </div>
+    <div style="margin-top:12px; text-align:center;">
+      <div class="classification-bar">TOP SECRET // ORCON // SPECIAL ACCESS REQUIRED — DELTA GREEN // THIS IS A WORK OF FICTION</div>
+    </div>
+  </div>
+
+</div><!-- /#document -->
+
+<script>
+// ===== DATA DEFINITIONS =====
+
+const STATS = [
+  { id: 'str', name: 'Strength', abbr: 'STR' },
+  { id: 'con', name: 'Constitution', abbr: 'CON' },
+  { id: 'dex', name: 'Dexterity', abbr: 'DEX' },
+  { id: 'int', name: 'Intelligence', abbr: 'INT' },
+  { id: 'pow', name: 'Power', abbr: 'POW' },
+  { id: 'cha', name: 'Charisma', abbr: 'CHA' },
+];
+
+const DERIVED = [
+  { id: 'hp', name: 'Hit Points', abbr: 'HP', formula: s => Math.ceil((s.str + s.con) / 2), tip: '(STR+CON)÷2' },
+  { id: 'wp', name: 'Willpower Points', abbr: 'WP', formula: s => s.pow, tip: 'POW' },
+  { id: 'san', name: 'Sanity Points', abbr: 'SAN', formula: s => s.pow * 5, tip: 'POW×5' },
+  { id: 'bp', name: 'Breaking Point', abbr: 'BP', formula: s => s.pow * 5 - s.pow, tip: 'SAN−POW', noMax: true },
+];
+
+const SKILLS = [
+  { name: 'Accounting', base: 10 },
+  { name: 'Alertness', base: 20 },
+  { name: 'Anthropology', base: 0 },
+  { name: 'Archeology', base: 0 },
+  { name: 'Art', base: 0, spec: true },
+  { name: 'Artillery', base: 0 },
+  { name: 'Athletics', base: 30 },
+  { name: 'Bureaucracy', base: 10 },
+  { name: 'Computer Science', base: 0 },
+  { name: 'Craft', base: 0, spec: true },
+  { name: 'Criminology', base: 10 },
+  { name: 'Demolitions', base: 0 },
+  { name: 'Disguise', base: 10 },
+  { name: 'Dodge', base: 30 },
+  { name: 'Drive', base: 20 },
+  { name: 'Firearms', base: 20 },
+  { name: 'First Aid', base: 10 },
+  { name: 'Forensics', base: 0 },
+  { name: 'Heavy Machinery', base: 10 },
+  { name: 'Heavy Weapons', base: 0 },
+  { name: 'History', base: 10 },
+  { name: 'HUMINT', base: 10 },
+  { name: 'Law', base: 0 },
+  { name: 'Medicine', base: 0 },
+  { name: 'Melee Weapons', base: 30 },
+  { name: 'Military Science', base: 0, spec: true },
+  { name: 'Navigate', base: 10 },
+  { name: 'Occult', base: 10 },
+  { name: 'Persuade', base: 20 },
+  { name: 'Pharmacy', base: 0 },
+  { name: 'Pilot', base: 0, spec: true },
+  { name: 'Psychotherapy', base: 10 },
+  { name: 'Ride', base: 10 },
+  { name: 'Science', base: 0, spec: true },
+  { name: 'Search', base: 20 },
+  { name: 'SIGINT', base: 0 },
+  { name: 'Stealth', base: 10 },
+  { name: 'Surgery', base: 0 },
+  { name: 'Survival', base: 10 },
+  { name: 'Swim', base: 20 },
+  { name: 'Unarmed Combat', base: 40 },
+  { name: 'Unnatural', base: 0 },
+  { name: 'Foreign Language', base: 0, spec: true },
+  { name: 'Other Skill', base: 0, spec: true },
+];
+
+const BOND_COUNT = 4;
+const MOTIVATION_COUNT = 5;
+const WEAPON_ROWS = 5;
+const TRAINING_ROWS = 5;
+
+// ===== ROLL UTILITIES =====
+function d(sides) { return Math.floor(Math.random() * sides) + 1; }
+function roll3d6() { return d(6) + d(6) + d(6); }
+
+function rollDice(sides) {
+  const result = d(sides);
+  document.getElementById('dice-result').textContent = result;
+  const hist = document.getElementById('dice-history');
+  const entry = `d${sides}→${result}`;
+  const prev = hist.textContent ? hist.textContent.split(' | ').slice(0, 4) : [];
+  hist.textContent = [entry, ...prev].join(' | ');
+}
+
+function rollAllStats() {
+  STATS.forEach(s => {
+    const score = roll3d6();
+    const scoreEl = document.getElementById(`stat-score-${s.id}`);
+    if (scoreEl) {
+      scoreEl.value = score;
+      updateStatX5(s.id);
+      updateDerived();
+    }
+  });
+  saveToState();
+  notify('Stats rolled! 🎲 Adjust as needed.');
+}
+
+function updateStatX5(statId) {
+  const scoreEl = document.getElementById(`stat-score-${statId}`);
+  const x5El = document.getElementById(`stat-x5-${statId}`);
+  if (scoreEl && x5El) {
+    const v = parseInt(scoreEl.value) || 0;
+    x5El.textContent = v * 5;
+  }
+}
+
+function updateDerived() {
+  const stats = {};
+  STATS.forEach(s => {
+    stats[s.id] = parseInt(document.getElementById(`stat-score-${s.id}`)?.value) || 0;
+  });
+  DERIVED.forEach(d => {
+    const val = d.formula(stats);
+    const maxEl = document.getElementById(`derived-max-${d.id}`);
+    if (maxEl) maxEl.textContent = val;
+    // Only auto-fill current if it's empty
+    const curEl = document.getElementById(`derived-cur-${d.id}`);
+    if (curEl && (!curEl.value || curEl.value === '0')) {
+      curEl.value = val;
+    }
+  });
+  // Also auto-set bond scores to CHA if empty
+  const cha = stats['cha'];
+  for (let i = 0; i < BOND_COUNT; i++) {
+    const bs = document.getElementById(`bond-score-${i}`);
+    if (bs && (!bs.value || bs.value === '0')) bs.value = cha || '';
+  }
+}
+
+// ===== BUILD DOM =====
+function buildStats() {
+  const tbody = document.getElementById('stats-body');
+  STATS.forEach(s => {
+    tbody.innerHTML += `
+      <tr>
+        <td class="stat-name">${s.name}<br><span style="font-size:9px;color:#8b7355;">(${s.abbr})</span></td>
+        <td style="text-align:center;">
+          <input type="number" id="stat-score-${s.id}" min="1" max="25" placeholder="—"
+            data-save="stat-score-${s.id}"
+            oninput="updateStatX5('${s.id}'); updateDerived(); saveToState();">
+        </td>
+        <td style="text-align:center;">
+          <span class="stat-x5" id="stat-x5-${s.id}">—</span>
+        </td>
+        <td>
+          <input type="text" style="width:100%; font-family:'Special Elite',serif; font-size:11px; background:transparent; border:none; border-bottom:1px solid var(--field-border); color:var(--ink); outline:none; padding:2px 2px 2px 0;"
+            placeholder="(if below 9 or above 12...)"
+            id="stat-feat-${s.id}" data-save="stat-feat-${s.id}"
+            oninput="saveToState()">
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function buildDerived() {
+  const tbody = document.getElementById('derived-body');
+  DERIVED.forEach(d => {
+    tbody.innerHTML += `
+      <tr>
+        <td class="attr-name">${d.name} <span style="font-size:8px;color:#8b7355;">(${d.tip})</span></td>
+        <td style="text-align:center;">
+          ${d.noMax
+            ? '<span class="max-val" style="font-size:9px;color:#8b7355;">auto</span>'
+            : `<span class="max-val" id="derived-max-${d.id}">—</span>`}
+        </td>
+        <td style="text-align:center;">
+          <input type="number" id="derived-cur-${d.id}" min="0" max="200" placeholder="—"
+            style="font-family:'Special Elite',serif; font-size:18px; width:52px; text-align:center; background:transparent; border:none; border-bottom:${d.id==='san'?'2px solid var(--red-stamp)':d.id==='hp'?'2px solid var(--green)':'1px solid var(--field-border)'}; color:var(--ink); outline:none; padding:2px 0;"
+            data-save="derived-cur-${d.id}"
+            oninput="saveToState()">
+        </td>
+      </tr>
+    `;
+  });
+}
+
+function buildBonds() {
+  const cont = document.getElementById('bonds-container');
+  const labels = ['Spouse / Partner', 'Child / Parent', 'Colleague / Friend', 'Other Bond'];
+  for (let i = 0; i < BOND_COUNT; i++) {
+    cont.innerHTML += `
+      <div class="bond-row">
+        <span class="bond-num">${i + 1}.</span>
+        <input type="text" class="bond-name" id="bond-name-${i}"
+          placeholder="${labels[i] || 'Bond...'}"
+          data-save="bond-name-${i}" oninput="saveToState()">
+        <span class="bond-score-label">Score:</span>
+        <input type="number" class="bond-score" id="bond-score-${i}" min="0" max="25" placeholder="—"
+          data-save="bond-score-${i}" oninput="saveToState()">
+      </div>
+    `;
+  }
+}
+
+function buildMotivations() {
+  const cont = document.getElementById('motivations-container');
+  for (let i = 0; i < MOTIVATION_COUNT; i++) {
+    const isLast = i >= 3;
+    cont.innerHTML += `
+      <div class="motivation-row">
+        <span class="motivation-bullet">»</span>
+        <input type="text" class="motivation-input" id="motivation-${i}"
+          placeholder="${isLast ? 'Replace with mental disorder when SAN hits Breaking Point' : 'Belief, drive, or obsession...'}"
+          data-save="motivation-${i}" oninput="saveToState()">
+        ${isLast ? '<span class="motivation-tag">⚠ disorder slot</span>' : ''}
+      </div>
+    `;
+  }
+}
+
+function buildSanLoss() {
+  const cont = document.getElementById('san-loss-container');
+  const types = [
+    { id: 'violence', label: 'Violence' },
+    { id: 'helplessness', label: 'Helplessness' },
+  ];
+  types.forEach(t => {
+    let boxes = '';
+    for (let i = 0; i < 3; i++) {
+      boxes += `<input type="checkbox" class="san-box" id="san-${t.id}-${i}" data-save="san-${t.id}-${i}" onchange="saveToState()">`;
+    }
+    cont.innerHTML += `
+      <div class="san-track">
+        <span class="san-track-label">${t.label}</span>
+        <div class="san-boxes">
+          ${boxes}
+          <span class="san-adapted-label">Adapted:</span>
+          <input type="checkbox" class="san-adapted-box" id="san-${t.id}-adapted" data-save="san-${t.id}-adapted" onchange="saveToState()">
+        </div>
+      </div>
+    `;
+  });
+}
+
+function buildSkills() {
+  const grid = document.getElementById('skills-grid');
+  SKILLS.forEach((skill, idx) => {
+    const safeId = `skill-${idx}`;
+    const specNote = skill.spec ? ' <span style="color:#8b7355;font-size:8px;">(specify)</span>' : '';
+    grid.innerHTML += `
+      <div class="skill-item">
+        <input type="checkbox" class="skill-check" id="${safeId}-check"
+          data-save="${safeId}-check" onchange="saveToState()">
+        <label class="skill-name" for="${safeId}-check" title="${skill.name}">${skill.name}${specNote}</label>
+        <span class="skill-base">(${skill.base}%)</span>
+        <input type="number" class="skill-val" id="${safeId}-val" min="0" max="99"
+          value="${skill.base}" placeholder="${skill.base}"
+          data-save="${safeId}-val" oninput="saveToState()">
+        <span class="skill-pct">%</span>
+      </div>
+    `;
+  });
+}
+
+function buildWeapons() {
+  const tbody = document.getElementById('weapons-body');
+  const letters = 'abcdefghijklmnopqrst';
+  for (let i = 0; i < WEAPON_ROWS; i++) {
+    const l = letters[i];
+    tbody.innerHTML += `
+      <tr>
+        <td><input type="text" placeholder="Weapon name..." data-save="weapon-${i}-name" oninput="saveToState()"></td>
+        <td><input type="text" placeholder="%" data-save="weapon-${i}-skill" oninput="saveToState()"></td>
+        <td><input type="text" placeholder="range" data-save="weapon-${i}-range" oninput="saveToState()"></td>
+        <td><input type="text" placeholder="1D8, etc." data-save="weapon-${i}-damage" oninput="saveToState()"></td>
+        <td><input type="text" placeholder="AP" data-save="weapon-${i}-ap" oninput="saveToState()"></td>
+        <td><input type="text" placeholder="%" data-save="weapon-${i}-lethality" oninput="saveToState()"></td>
+        <td><input type="text" placeholder="radius" data-save="weapon-${i}-killrad" oninput="saveToState()"></td>
+        <td><input type="text" placeholder="#" data-save="weapon-${i}-ammo" oninput="saveToState()"></td>
+        <td><input type="text" placeholder="..." data-save="weapon-${i}-notes" oninput="saveToState()"></td>
+      </tr>
+    `;
+  }
+}
+
+function buildTraining() {
+  const tbody = document.getElementById('training-body');
+  for (let i = 0; i < TRAINING_ROWS; i++) {
+    tbody.innerHTML += `
+      <tr>
+        <td><input type="text" placeholder="Training description..." data-save="training-${i}-name" oninput="saveToState()"></td>
+        <td><input type="text" placeholder="e.g. Firearms" data-save="training-${i}-stat" oninput="saveToState()"></td>
+        <td><input type="text" placeholder="Notes..." data-save="training-${i}-remarks" oninput="saveToState()"></td>
+      </tr>
+    `;
+  }
+}
+
+// ===== SAVE / LOAD =====
+function gatherState() {
+  const state = {};
+  document.querySelectorAll('[data-save]').forEach(el => {
+    const key = el.dataset.save;
+    if (el.type === 'checkbox') {
+      state[key] = el.checked;
+    } else {
+      state[key] = el.value;
+    }
+  });
+  return state;
+}
+
+function applyState(state) {
+  if (!state) return;
+  document.querySelectorAll('[data-save]').forEach(el => {
+    const key = el.dataset.save;
+    if (key in state) {
+      if (el.type === 'checkbox') {
+        el.checked = !!state[key];
+      } else {
+        el.value = state[key];
+      }
+    }
+  });
+  // Recompute x5 and derived
+  STATS.forEach(s => updateStatX5(s.id));
+  // Recompute derived max labels
+  const stats = {};
+  STATS.forEach(s => {
+    stats[s.id] = parseInt(document.getElementById(`stat-score-${s.id}`)?.value) || 0;
+  });
+  DERIVED.forEach(d => {
+    const val = d.formula(stats);
+    const maxEl = document.getElementById(`derived-max-${d.id}`);
+    if (maxEl) maxEl.textContent = val;
+  });
+}
+
+function saveToState() {
+  const state = gatherState();
+  try {
+    const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+    history.replaceState(null, '', '#' + encoded);
+  } catch(e) {}
+}
+
+function loadFromHash() {
+  const hash = window.location.hash.slice(1);
+  if (!hash) return false;
+  try {
+    const state = JSON.parse(decodeURIComponent(escape(atob(hash))));
+    applyState(state);
+    return true;
+  } catch(e) {
+    return false;
+  }
+}
+
+// ===== SHARE =====
+function copyShareLink() {
+  saveToState();
+  const url = window.location.href;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => {
+      notify('Share link copied to clipboard! Send it to your Handler or fellow agents.');
+    }).catch(() => {
+      prompt('Copy this link to share your agent:', url);
+    });
+  } else {
+    prompt('Copy this link to share your agent:', url);
+  }
+}
+
+// ===== NEW AGENT =====
+function promptNewAgent() {
+  document.getElementById('new-agent-overlay').classList.add('show');
+}
+function cancelNewAgent() {
+  document.getElementById('new-agent-overlay').classList.remove('show');
+}
+function confirmNewAgent() {
+  document.getElementById('new-agent-overlay').classList.remove('show');
+  // Clear all inputs
+  document.querySelectorAll('[data-save]').forEach(el => {
+    if (el.type === 'checkbox') el.checked = false;
+    else if (el.tagName === 'SELECT') el.selectedIndex = 0;
+    else el.value = '';
+  });
+  // Reset skill values to base
+  SKILLS.forEach((skill, idx) => {
+    const el = document.getElementById(`skill-${idx}-val`);
+    if (el) el.value = skill.base;
+  });
+  // Clear derived max labels
+  DERIVED.forEach(d => {
+    const el = document.getElementById(`derived-max-${d.id}`);
+    if (el) el.textContent = '—';
+  });
+  // Clear stat x5
+  STATS.forEach(s => {
+    const el = document.getElementById(`stat-x5-${s.id}`);
+    if (el) el.textContent = '—';
+  });
+  history.replaceState(null, '', window.location.pathname);
+  notify('New agent file opened. Good luck, Agent.');
+}
+
+// ===== NOTIFY =====
+let notifyTimer;
+function notify(msg) {
+  const el = document.getElementById('notification');
+  el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(notifyTimer);
+  notifyTimer = setTimeout(() => el.classList.remove('show'), 3500);
+}
+
+// ===== INIT =====
+function init() {
+  buildStats();
+  buildDerived();
+  buildBonds();
+  buildMotivations();
+  buildSanLoss();
+  buildSkills();
+  buildWeapons();
+  buildTraining();
+
+  const loaded = loadFromHash();
+  if (!loaded) {
+    // Default skill values
+    SKILLS.forEach((skill, idx) => {
+      const el = document.getElementById(`skill-${idx}-val`);
+      if (el) el.value = skill.base;
+    });
+  }
+
+  // Listen to all simple inputs that don't have inline oninput already
+  document.querySelectorAll('[data-save]:not([oninput]):not([onchange])').forEach(el => {
+    el.addEventListener('input', saveToState);
+    el.addEventListener('change', saveToState);
+  });
+
+  if (loaded) notify('Agent file loaded. Welcome back.');
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
