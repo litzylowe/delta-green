@@ -628,7 +628,7 @@
   #profession-desc {
     font-family: 'Share Tech Mono', monospace;
     font-size: 10px;
-    color: #6a5c40;
+    color: #c4ae80;
     letter-spacing: 0.5px;
     flex: 1;
     font-style: italic;
@@ -638,9 +638,9 @@
     font-size: 10px;
     letter-spacing: 1px;
     padding: 6px 14px;
-    background: #3d2a0a;
-    color: #d4a830;
-    border: 1px solid #6b4a1e;
+    background: #2e2008;
+    color: #f0cc44;
+    border: 1px solid #7a5e28;
     cursor: pointer;
     text-transform: uppercase;
     white-space: nowrap;
@@ -676,7 +676,7 @@
   }
   .choose-box .choose-instruction {
     font-size: 10px;
-    color: #6a5c40;
+    color: #c4ae80;
     margin-bottom: 14px;
     letter-spacing: 0.5px;
     line-height: 1.6;
@@ -750,7 +750,7 @@
   }
   .bonus-box .bonus-instruction {
     font-size: 10px;
-    color: #6a5c40;
+    color: #c4ae80;
     margin-bottom: 14px;
     letter-spacing: 0.5px;
     line-height: 1.6;
@@ -774,7 +774,7 @@
   }
   .bonus-skill-row .cur-val {
     font-size: 12px;
-    color: #6a5c40;
+    color: #c4ae80;
     width: 30px;
     text-align: right;
   }
@@ -988,6 +988,165 @@
   .noborder-bottom { border-bottom: none !important; }
   .w-auto { width: auto; }
 
+  /* ===== AGENT LIBRARY MODAL ===== */
+  #library-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.82);
+    z-index: 1200;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 40px;
+    overflow-y: auto;
+  }
+  #library-overlay.show { display: flex; }
+  .library-box {
+    background: var(--paper);
+    border: 2px solid var(--border);
+    padding: 0;
+    max-width: 560px;
+    width: 92%;
+    font-family: 'Share Tech Mono', monospace;
+    margin-bottom: 40px;
+  }
+  .library-header {
+    background: var(--ink);
+    color: #c8b890;
+    padding: 12px 18px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .library-header h2 {
+    font-family: 'Special Elite', serif;
+    font-size: 16px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+  }
+  .library-close {
+    background: none;
+    border: none;
+    color: #8b7355;
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+  }
+  .library-close:hover { color: #c8b890; }
+  .library-actions {
+    display: flex;
+    gap: 8px;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  .library-actions-right { margin-left: auto; display: flex; gap: 8px; }
+  .library-empty {
+    padding: 28px 18px;
+    text-align: center;
+    font-size: 11px;
+    color: #8b7355;
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+  .agent-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 16px;
+    border-bottom: 1px solid rgba(74,63,47,0.35);
+    transition: background 0.1s;
+  }
+  .agent-card:hover { background: rgba(45,74,30,0.06); }
+  .agent-card-info { flex: 1; min-width: 0; }
+  .agent-card-name {
+    font-family: 'Special Elite', serif;
+    font-size: 14px;
+    color: var(--ink);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .agent-card-meta {
+    font-size: 9px;
+    color: #8b7355;
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+  .agent-card-btns { display: flex; gap: 6px; flex-shrink: 0; }
+  .card-btn {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 1px;
+    padding: 4px 10px;
+    border: 1px solid;
+    cursor: pointer;
+    text-transform: uppercase;
+  }
+  .card-btn-load { background: var(--green); color: #d0e8c0; border-color: var(--green-light); }
+  .card-btn-load:hover { background: var(--green-light); }
+  .card-btn-export { background: #1a2d3d; color: #a0c8e8; border-color: #2a4a6b; }
+  .card-btn-export:hover { background: #1e3a52; }
+  .card-btn-delete { background: #3d1a1a; color: #e8c0c0; border-color: #6b2a2a; }
+  .card-btn-delete:hover { background: #5c2020; }
+
+  /* Save name prompt */
+  #save-name-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.75);
+    z-index: 1300;
+    align-items: center;
+    justify-content: center;
+  }
+  #save-name-overlay.show { display: flex; }
+  .save-name-box {
+    background: var(--paper);
+    border: 2px solid var(--border);
+    padding: 26px 28px;
+    max-width: 380px;
+    width: 90%;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .save-name-box h2 {
+    font-family: 'Special Elite', serif;
+    font-size: 15px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .save-name-box p {
+    font-size: 10px;
+    color: #8b7355;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+  }
+  #save-name-input {
+    font-family: 'Special Elite', serif;
+    font-size: 16px;
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--border);
+    color: var(--ink);
+    outline: none;
+    padding: 4px 2px;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+  #save-name-input:focus { border-bottom-color: var(--green); }
+  #save-overwrite-warning {
+    font-size: 10px;
+    color: var(--red-stamp);
+    margin-bottom: 10px;
+    min-height: 14px;
+    letter-spacing: 0.5px;
+  }
+
   /* ===== PRINT STYLES ===== */
   @media print {
     /* Page setup */
@@ -1004,6 +1163,8 @@
     #new-agent-overlay,
     #choose-overlay,
     #bonus-overlay,
+    #library-overlay,
+    #save-name-overlay,
     .roll-btn,
     .btn { display: none !important; }
 
@@ -1242,14 +1403,14 @@
   #dice-result {
     font-family: 'Special Elite', serif;
     font-size: 20px;
-    color: #d4a830;
+    color: #f0cc44;
     min-width: 50px;
     text-align: center;
   }
   #dice-history {
     font-family: 'Share Tech Mono', monospace;
     font-size: 10px;
-    color: #5a5040;
+    color: #8c7e62;
     flex: 1;
     letter-spacing: 0.5px;
   }
@@ -1283,7 +1444,9 @@
   </div>
   <div class="toolbar-right">
     <button class="btn btn-neutral" onclick="promptNewAgent()">↺ New Agent</button>
+    <button class="btn btn-primary" onclick="openLibrary()" style="background:#2e2008;color:#f0cc44;border-color:#7a5e28;">⬡ My Agents</button>
     <button class="btn btn-share" onclick="copyShareLink()">⚑ Copy Share Link</button>
+    <button class="btn btn-neutral" onclick="exportCurrentAgent()">↓ Export JSON</button>
     <button class="btn btn-neutral" onclick="window.print()">⎙ Print</button>
   </div>
 </div>
@@ -1293,6 +1456,40 @@
   <span class="dice-label">Last Roll:</span>
   <span id="dice-result">—</span>
   <span id="dice-history" class="dice-history"></span>
+</div>
+
+<!-- AGENT LIBRARY MODAL -->
+<div id="library-overlay">
+  <div class="library-box">
+    <div class="library-header">
+      <h2>⬡ Agent Roster</h2>
+      <button class="library-close" onclick="closeLibrary()">✕</button>
+    </div>
+    <div class="library-actions">
+      <button class="btn btn-primary" onclick="openSavePrompt()">⬇ Save Current Agent</button>
+      <div class="library-actions-right">
+        <button class="btn btn-neutral" onclick="triggerImport()">↑ Import JSON</button>
+        <input type="file" id="import-file-input" accept=".json" style="display:none" onchange="importAgentFile(event)">
+      </div>
+    </div>
+    <div id="library-list">
+      <div class="library-empty">No agents saved yet. Fill out a sheet and hit "Save Current Agent."</div>
+    </div>
+  </div>
+</div>
+
+<!-- SAVE NAME PROMPT -->
+<div id="save-name-overlay">
+  <div class="save-name-box">
+    <h2>Save Agent</h2>
+    <p>Enter a name for this agent file (defaults to the agent's name on the sheet).</p>
+    <input type="text" id="save-name-input" placeholder="Agent designation..." onkeydown="if(event.key==='Enter') confirmSave()">
+    <div id="save-overwrite-warning"></div>
+    <div class="overlay-btns">
+      <button class="btn btn-primary" onclick="confirmSave()">Save</button>
+      <button class="btn btn-neutral" onclick="cancelSave()">Cancel</button>
+    </div>
+  </div>
 </div>
 
 <!-- PROFESSION PANEL -->
@@ -2238,7 +2435,7 @@ function updateBondCountHint(count) {
   const bar = sec?.querySelector('.sec-bar');
   if (bar) {
     bar.innerHTML = bar.innerHTML.replace(/ \(\d+ bonds?\)/, '');
-    bar.innerHTML += ` <span style="color:#d4a830;font-size:9px;margin-left:8px;">(${count} bonds for this profession)</span>`;
+    bar.innerHTML += ` <span style="color:#f0cc44;font-size:9px;margin-left:8px;">(${count} bonds for this profession)</span>`;
   }
 }
 
@@ -2446,7 +2643,7 @@ function refreshBonusNew(idx, adding) {
   const el = document.getElementById(`bonus-new-${idx}`);
   if (el) {
     el.textContent = newVal + '%';
-    el.style.color = adding ? 'var(--green-light)' : '#6a5c40';
+    el.style.color = adding ? 'var(--green-light)' : '#c4ae80';
   }
 }
 
@@ -2467,6 +2664,216 @@ function confirmBonus() {
   document.getElementById('bonus-overlay').classList.remove('show');
   saveToState();
   notify(`✓ Profession + bonus skills applied. Customize further as needed.`);
+}
+
+// ===== AGENT LIBRARY (localStorage) =====
+const STORAGE_KEY = 'delta-green-agents';
+
+function loadRoster() {
+  try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; }
+  catch(e) { return []; }
+}
+
+function saveRoster(roster) {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(roster));
+}
+
+function openLibrary() {
+  renderLibrary();
+  document.getElementById('library-overlay').classList.add('show');
+}
+
+function closeLibrary() {
+  document.getElementById('library-overlay').classList.remove('show');
+}
+
+function renderLibrary() {
+  const roster = loadRoster();
+  const list = document.getElementById('library-list');
+  if (!roster.length) {
+    list.innerHTML = '<div class="library-empty">No agents saved yet. Fill out a sheet and hit "Save Current Agent."</div>';
+    return;
+  }
+  list.innerHTML = roster.map((agent, i) => {
+    const date = new Date(agent.savedAt).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+    const prof = agent.state['agent-profession'] || '—';
+    const employer = agent.state['agent-employer'] || '—';
+    return `
+      <div class="agent-card">
+        <div class="agent-card-info">
+          <div class="agent-card-name">${escapeHtml(agent.name)}</div>
+          <div class="agent-card-meta">${escapeHtml(prof)} · ${escapeHtml(employer)} · Saved ${date}</div>
+        </div>
+        <div class="agent-card-btns">
+          <button class="card-btn card-btn-load" onclick="loadAgent(${i})">Load</button>
+          <button class="card-btn card-btn-export" onclick="exportAgent(${i})">Export</button>
+          <button class="card-btn card-btn-delete" onclick="deleteAgent(${i})">✕</button>
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function escapeHtml(str) {
+  return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+// ---- SAVE ----
+let _saveIsUpdate = false;
+let _saveUpdateIndex = -1;
+
+function openSavePrompt() {
+  const agentName = document.getElementById('agent-name')?.value || '';
+  const input = document.getElementById('save-name-input');
+  input.value = agentName || '';
+  input.placeholder = agentName || 'Agent designation...';
+
+  // Check if a slot with this name already exists
+  checkOverwrite(agentName);
+
+  document.getElementById('save-name-overlay').classList.add('show');
+  setTimeout(() => input.focus(), 80);
+}
+
+function checkOverwrite(name) {
+  const warn = document.getElementById('save-overwrite-warning');
+  const roster = loadRoster();
+  const idx = roster.findIndex(a => a.name.toLowerCase() === name.trim().toLowerCase());
+  if (idx >= 0 && name.trim()) {
+    warn.textContent = `⚠ A saved agent named "${name.trim()}" exists — saving will overwrite it.`;
+    _saveIsUpdate = true;
+    _saveUpdateIndex = idx;
+  } else {
+    warn.textContent = '';
+    _saveIsUpdate = false;
+    _saveUpdateIndex = -1;
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const nameInput = document.getElementById('save-name-input');
+  if (nameInput) nameInput.addEventListener('input', () => checkOverwrite(nameInput.value));
+});
+
+function cancelSave() {
+  document.getElementById('save-name-overlay').classList.remove('show');
+}
+
+function confirmSave() {
+  const rawName = document.getElementById('save-name-input').value.trim();
+  const agentName = rawName || document.getElementById('agent-name')?.value || 'Unnamed Agent';
+  if (!agentName) { notify('Enter a name for this agent.'); return; }
+
+  const state = gatherState();
+  const roster = loadRoster();
+  const entry = { name: agentName, savedAt: new Date().toISOString(), state };
+
+  if (_saveIsUpdate && _saveUpdateIndex >= 0) {
+    roster[_saveUpdateIndex] = entry;
+  } else {
+    roster.unshift(entry); // newest first
+  }
+
+  saveRoster(roster);
+  document.getElementById('save-name-overlay').classList.remove('show');
+  renderLibrary();
+  notify(`Agent "${agentName}" saved to roster.`);
+}
+
+// ---- LOAD ----
+function loadAgent(i) {
+  const roster = loadRoster();
+  const agent = roster[i];
+  if (!agent) return;
+
+  // Wipe sheet then apply state
+  document.querySelectorAll('[data-save]').forEach(el => {
+    if (el.type === 'checkbox') el.checked = false;
+    else if (el.tagName === 'SELECT') el.selectedIndex = 0;
+    else el.value = '';
+  });
+  applyState(agent.state);
+  saveToState(); // sync URL hash too
+
+  closeLibrary();
+  notify(`Agent "${agent.name}" loaded.`);
+}
+
+// ---- DELETE ----
+function deleteAgent(i) {
+  const roster = loadRoster();
+  const agent = roster[i];
+  if (!agent) return;
+  if (!confirm(`Delete saved agent "${agent.name}"? This cannot be undone.`)) return;
+  roster.splice(i, 1);
+  saveRoster(roster);
+  renderLibrary();
+  notify(`Agent "${agent.name}" deleted from roster.`);
+}
+
+// ---- EXPORT single agent as JSON file ----
+function exportAgent(i) {
+  const roster = loadRoster();
+  const agent = roster[i];
+  if (!agent) return;
+  const blob = new Blob([JSON.stringify(agent, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const safeName = agent.name.replace(/[^a-z0-9_\-]/gi, '_');
+  a.href = url;
+  a.download = `dg-agent-${safeName}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  notify(`Exported "${agent.name}" as JSON.`);
+}
+
+// ---- EXPORT current sheet (no save required) ----
+function exportCurrentAgent() {
+  const state = gatherState();
+  const name = document.getElementById('agent-name')?.value || 'Unnamed Agent';
+  const agent = { name, savedAt: new Date().toISOString(), state };
+  const blob = new Blob([JSON.stringify(agent, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  const safeName = name.replace(/[^a-z0-9_\-]/gi, '_');
+  a.href = url;
+  a.download = `dg-agent-${safeName}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  notify(`Exported current agent as JSON.`);
+}
+
+// ---- IMPORT from JSON file ----
+function triggerImport() {
+  document.getElementById('import-file-input').click();
+}
+
+function importAgentFile(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    try {
+      const agent = JSON.parse(e.target.result);
+      if (!agent.state || !agent.name) throw new Error('Invalid format');
+      const roster = loadRoster();
+      // Check duplicate
+      const existing = roster.findIndex(a => a.name.toLowerCase() === agent.name.toLowerCase());
+      if (existing >= 0) {
+        if (!confirm(`An agent named "${agent.name}" already exists. Overwrite?`)) return;
+        roster[existing] = agent;
+      } else {
+        roster.unshift(agent);
+      }
+      saveRoster(roster);
+      renderLibrary();
+      notify(`Imported agent "${agent.name}".`);
+    } catch(err) {
+      notify('Could not read that file — make sure it\'s a valid Delta Green agent JSON.');
+    }
+  };
+  reader.readAsText(file);
+  event.target.value = ''; // reset so same file can be re-imported
 }
 
 // ===== NOTIFY =====
