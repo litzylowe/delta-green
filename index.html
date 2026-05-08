@@ -592,6 +592,209 @@
     color: var(--paper);
   }
 
+  /* ===== PROFESSION PANEL ===== */
+  #profession-panel {
+    max-width: 960px;
+    margin: 0 auto 12px;
+    background: #16120e;
+    border: 1px solid #3a2e1e;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  #profession-panel label {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #8b7355;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  #profession-select {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 12px;
+    background: #1e1812;
+    color: #d4c8a8;
+    border: 1px solid #4a3a1e;
+    padding: 6px 10px;
+    cursor: pointer;
+    outline: none;
+    min-width: 240px;
+    letter-spacing: 0.5px;
+  }
+  #profession-select:focus { border-color: var(--green-light); }
+  #profession-desc {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    color: #6a5c40;
+    letter-spacing: 0.5px;
+    flex: 1;
+    font-style: italic;
+  }
+  .btn-apply-prof {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 1px;
+    padding: 6px 14px;
+    background: #3d2a0a;
+    color: #d4a830;
+    border: 1px solid #6b4a1e;
+    cursor: pointer;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .btn-apply-prof:hover { background: #5c3e10; }
+
+  /* ===== PROFESSION CHOOSE MODAL ===== */
+  #choose-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 1100;
+    align-items: center;
+    justify-content: center;
+  }
+  #choose-overlay.show { display: flex; }
+  .choose-box {
+    background: var(--paper);
+    border: 2px solid var(--border);
+    padding: 24px 28px;
+    max-width: 480px;
+    width: 90%;
+    font-family: 'Share Tech Mono', monospace;
+  }
+  .choose-box h2 {
+    font-family: 'Special Elite', serif;
+    font-size: 16px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .choose-box .choose-instruction {
+    font-size: 10px;
+    color: #6a5c40;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+  }
+  .choose-option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    border-bottom: 1px solid rgba(74,63,47,0.3);
+    cursor: pointer;
+  }
+  .choose-option:hover { background: rgba(45,74,30,0.08); }
+  .choose-option input[type="checkbox"] {
+    width: 16px; height: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  .choose-option label {
+    font-size: 12px;
+    color: var(--ink-faded);
+    cursor: pointer;
+    flex: 1;
+    font-family: 'Special Elite', serif;
+  }
+  .choose-option .opt-val {
+    font-size: 13px;
+    color: var(--green-light);
+    font-family: 'Special Elite', serif;
+    font-weight: bold;
+  }
+  #choose-count-display {
+    font-size: 10px;
+    color: var(--red-stamp);
+    margin: 10px 0 4px;
+    letter-spacing: 1px;
+    font-weight: bold;
+    min-height: 16px;
+  }
+  .choose-btns { display: flex; gap: 10px; margin-top: 14px; justify-content: flex-end; }
+
+  /* Bonus skills step */
+  #bonus-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.8);
+    z-index: 1100;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 40px;
+    overflow-y: auto;
+  }
+  #bonus-overlay.show { display: flex; }
+  .bonus-box {
+    background: var(--paper);
+    border: 2px solid var(--border);
+    padding: 24px 28px;
+    max-width: 520px;
+    width: 90%;
+    font-family: 'Share Tech Mono', monospace;
+    margin-bottom: 40px;
+  }
+  .bonus-box h2 {
+    font-family: 'Special Elite', serif;
+    font-size: 16px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .bonus-box .bonus-instruction {
+    font-size: 10px;
+    color: #6a5c40;
+    margin-bottom: 14px;
+    letter-spacing: 0.5px;
+    line-height: 1.6;
+    border-bottom: 1px solid rgba(74,63,47,0.3);
+    padding-bottom: 10px;
+  }
+  .bonus-skill-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px;
+    border-bottom: 1px solid rgba(74,63,47,0.2);
+  }
+  .bonus-skill-row:hover { background: rgba(45,74,30,0.06); }
+  .bonus-skill-row label {
+    flex: 1;
+    font-size: 11px;
+    color: var(--ink-faded);
+    font-family: 'Special Elite', serif;
+    cursor: pointer;
+  }
+  .bonus-skill-row .cur-val {
+    font-size: 12px;
+    color: #6a5c40;
+    width: 30px;
+    text-align: right;
+  }
+  .bonus-skill-row input[type="checkbox"] { width:15px; height:15px; cursor:pointer; flex-shrink:0; }
+  .bonus-skill-row .new-val {
+    font-size: 13px;
+    color: var(--green-light);
+    font-weight: bold;
+    width: 38px;
+    text-align: right;
+    font-family: 'Special Elite', serif;
+  }
+  #bonus-remaining {
+    font-size: 11px;
+    color: var(--red-stamp);
+    margin: 8px 0 4px;
+    font-weight: bold;
+    letter-spacing: 1px;
+  }
+
   /* ===== WEAPONS TABLE ===== */
   .weapons-table { width: 100%; border-collapse: collapse; font-size: 11px; }
   .weapons-table th {
@@ -787,11 +990,234 @@
 
   /* ===== PRINT STYLES ===== */
   @media print {
-    body { background: white; padding: 0; }
-    #toolbar { display: none; }
-    #document { box-shadow: none; max-width: 100%; border: none; }
-    .btn { display: none; }
-    .roll-btn { display: none; }
+    /* Page setup */
+    @page {
+      size: letter portrait;
+      margin: 0.55in 0.5in 0.5in 0.5in;
+    }
+
+    /* Hide all UI chrome */
+    #toolbar,
+    #dice-panel,
+    #profession-panel,
+    #notification,
+    #new-agent-overlay,
+    #choose-overlay,
+    #bonus-overlay,
+    .roll-btn,
+    .btn { display: none !important; }
+
+    /* Root document */
+    html, body {
+      background: white !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      font-size: 10px;
+      color: black !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Main document wrapper */
+    #document {
+      max-width: 100% !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      box-shadow: none !important;
+      border: none !important;
+      background: white !important;
+    }
+
+    /* Suppress the paper texture */
+    #document::before { display: none !important; }
+
+    /* Header */
+    .doc-header { padding-bottom: 6px; margin-bottom: 6px; }
+    .doc-title-main { font-size: 18px !important; }
+    .stamp-topsecret { font-size: 11px !important; padding: 2px 8px !important; }
+    .classification-bar {
+      background: black !important;
+      color: white !important;
+      font-size: 8px !important;
+      padding: 2px 6px !important;
+    }
+
+    /* All section borders */
+    .section, [style*="border:1px solid var(--border)"],
+    [style*="border: 1px solid var(--border)"] {
+      border-color: #888 !important;
+    }
+
+    /* Section header bars — print in dark grey to save ink */
+    .sec-bar,
+    [class*="sec-bar"] {
+      background: #333 !important;
+      color: #eee !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+      font-size: 8px !important;
+      padding: 2px 6px !important;
+    }
+
+    /* Field labels */
+    .field-label { font-size: 7px !important; color: #555 !important; }
+
+    /* All text inputs, textareas, selects */
+    input, textarea, select {
+      background: transparent !important;
+      border-color: #aaa !important;
+      color: black !important;
+      font-size: 11px !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* Make sure textarea contents are visible */
+    textarea {
+      overflow: visible !important;
+      min-height: unset !important;
+      height: auto !important;
+      resize: none !important;
+    }
+
+    /* Stats table */
+    .stats-table th {
+      background: #333 !important;
+      color: #eee !important;
+      font-size: 7px !important;
+      padding: 2px 4px !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .stats-table td { border-color: #aaa !important; padding: 2px 3px !important; }
+    .stats-table .stat-name { font-size: 9px !important; color: #333 !important; }
+    .stats-table input[type="number"] { font-size: 13px !important; width: 40px !important; }
+    .stat-x5 { font-size: 12px !important; color: #000 !important; }
+
+    /* Derived attributes */
+    .derived-table th {
+      background: #333 !important;
+      color: #eee !important;
+      font-size: 7px !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .derived-table td { border-color: #aaa !important; }
+    .derived-table .attr-name { font-size: 8px !important; color: #333 !important; }
+    .derived-table input[type="number"] { font-size: 14px !important; }
+    .derived-table .max-val { font-size: 12px !important; color: #555 !important; }
+
+    /* Skills grid */
+    .skills-grid { font-size: 9px !important; }
+    .skill-item {
+      padding: 1px 3px !important;
+      border-color: #ccc !important;
+    }
+    .skill-name { font-size: 9px !important; color: #222 !important; }
+    .skill-base { font-size: 8px !important; color: #666 !important; }
+    .skill-val { font-size: 11px !important; color: #000 !important; border-color: #aaa !important; }
+    .skill-pct { font-size: 8px !important; }
+
+    /* Checkboxes — ensure they print with visible borders */
+    .skill-check,
+    .san-box,
+    .san-adapted-box {
+      border: 1.5px solid #555 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .skill-check:checked { background: #222 !important; }
+    .san-box:checked { background: #8b1a1a !important; border-color: #8b1a1a !important; }
+    .san-adapted-box:checked { background: #333 !important; }
+
+    /* Bonds */
+    .bond-row { padding: 2px 4px !important; border-color: #aaa !important; }
+    .bond-num { font-size: 8px !important; color: #444 !important; }
+    .bond-name { font-size: 11px !important; border-color: #aaa !important; }
+    .bond-score { font-size: 14px !important; border-color: #aaa !important; }
+    .bond-score-label { font-size: 8px !important; color: #444 !important; }
+
+    /* Motivations */
+    .motivation-row { padding: 2px 4px !important; }
+    .motivation-bullet { font-size: 9px !important; color: #444 !important; }
+    .motivation-input { font-size: 11px !important; border-color: #aaa !important; }
+    .motivation-tag { font-size: 7px !important; }
+
+    /* SAN loss trackers */
+    .san-track { padding: 3px 6px !important; }
+    .san-track-label { font-size: 8px !important; color: #333 !important; }
+    .san-adapted-label { font-size: 7px !important; }
+
+    /* Weapons table */
+    .weapons-table th {
+      background: #333 !important;
+      color: #eee !important;
+      font-size: 7px !important;
+      padding: 2px 3px !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .weapons-table td { border-color: #aaa !important; padding: 2px !important; }
+    .weapons-table input { font-size: 10px !important; }
+
+    /* Training table */
+    .training-table th {
+      background: #333 !important;
+      color: #eee !important;
+      font-size: 7px !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .training-table td { border-color: #aaa !important; }
+    .training-table input { font-size: 10px !important; }
+
+    /* Footer */
+    .doc-footer { padding-top: 6px; margin-top: 6px; }
+    .sig-label { font-size: 7px !important; color: #444 !important; }
+    .sig-input { font-size: 12px !important; border-color: #888 !important; }
+
+    /* Section gaps */
+    [style*="margin-bottom:2px"],
+    [style*="margin-bottom: 2px"] { margin-bottom: 2px !important; }
+
+    /* Page break control */
+    /* Avoid breaking inside key sections */
+    .stats-table, .derived-table, .bond-row, .san-track,
+    .weapons-table, .training-table {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Skills grid — keep together if possible */
+    .skills-grid {
+      page-break-inside: avoid;
+      break-inside: avoid;
+    }
+
+    /* Force page break before wounds/gear if near bottom */
+    #document > [style*="display:grid"]:last-of-type {
+      page-break-before: auto;
+    }
+
+    /* Field group borders */
+    .field-group { border-color: #ccc !important; }
+    .field-input { border-color: #aaa !important; color: black !important; }
+
+    /* Section label text */
+    .section-label, .section-label-side {
+      background: #333 !important;
+      color: #eee !important;
+    }
+
+    /* Sec bar numbers */
+    .sec-bar-num { color: #bbb !important; font-size: 9px !important; }
+
+    /* Remove green highlight from focused fields (doesn't matter in print) */
+    input:focus, textarea:focus, select:focus {
+      background: transparent !important;
+      border-color: #aaa !important;
+    }
   }
 
   /* ===== DICE ROLLER ===== */
@@ -867,6 +1293,52 @@
   <span class="dice-label">Last Roll:</span>
   <span id="dice-result">—</span>
   <span id="dice-history" class="dice-history"></span>
+</div>
+
+<!-- PROFESSION PANEL -->
+<div id="profession-panel">
+  <label for="profession-select">▸ Profession:</label>
+  <select id="profession-select" onchange="onProfessionChange()">
+    <option value="">— Select Profession —</option>
+    <option value="anthropologist">Anthropologist / Historian</option>
+    <option value="computer_scientist">Computer Scientist / Engineer</option>
+    <option value="federal_agent">Federal Agent</option>
+    <option value="physician">Physician</option>
+    <option value="scientist">Scientist</option>
+    <option value="special_operator">Special Operator</option>
+  </select>
+  <span id="profession-desc">Select a profession to pre-populate skill arrays from the rulebook.</span>
+  <button class="btn-apply-prof" onclick="applyProfession()">Apply Skills ▸</button>
+</div>
+
+<!-- PROFESSION CHOOSE MODAL -->
+<div id="choose-overlay">
+  <div class="choose-box">
+    <h2 id="choose-title">Choose Skills</h2>
+    <div class="choose-instruction" id="choose-instruction"></div>
+    <div id="choose-options-list"></div>
+    <div id="choose-count-display"></div>
+    <div class="choose-btns">
+      <button class="btn btn-neutral" onclick="cancelChoose()">Cancel</button>
+      <button class="btn btn-primary" id="choose-confirm-btn" onclick="confirmChoose()">Confirm Choices ▸</button>
+    </div>
+  </div>
+</div>
+
+<!-- BONUS SKILLS MODAL -->
+<div id="bonus-overlay">
+  <div class="bonus-box">
+    <h2>Bonus Skills</h2>
+    <div class="bonus-instruction">
+      Pick any <strong>8 skills</strong> and add 20% to each. No skill may exceed 80% to start — excess points go to another skill of your choice. Check the boxes below to select your bonus skills.
+    </div>
+    <div id="bonus-remaining">8 selections remaining</div>
+    <div id="bonus-skills-list"></div>
+    <div class="choose-btns" style="margin-top:16px;">
+      <button class="btn btn-neutral" onclick="cancelBonus()">Skip</button>
+      <button class="btn btn-primary" onclick="confirmBonus()">Apply Bonus Skills ▸</button>
+    </div>
+  </div>
 </div>
 
 <!-- DOCUMENT -->
@@ -1542,6 +2014,459 @@ function confirmNewAgent() {
   });
   history.replaceState(null, '', window.location.pathname);
   notify('New agent file opened. Good luck, Agent.');
+}
+
+// ===== PROFESSION DATA =====
+const PROFESSIONS = {
+  anthropologist: {
+    name: 'Anthropologist / Historian',
+    bonds: 4,
+    desc: '4 bonds. Expertise in cultures, history, languages, and the occult.',
+    fixed: [
+      { name: 'Bureaucracy', val: 40 },
+      { name: 'History', val: 60 },
+      { name: 'Occult', val: 40 },
+      { name: 'Persuade', val: 40 },
+      // Anthropology OR Archaeology — handled as special
+    ],
+    fixedNote: 'Also choose: Anthropology 50% OR Archeology 50%, plus two Foreign Languages (50% and 30%).',
+    chooseCount: 2,
+    chooseLabel: 'Choose 2 optional skills',
+    choices: [
+      { name: 'Anthropology', val: 40 },
+      { name: 'Archeology', val: 40 },
+      { name: 'HUMINT', val: 50 },
+      { name: 'Navigate', val: 50 },
+      { name: 'Ride', val: 50 },
+      { name: 'Search', val: 60 },
+      { name: 'Survival', val: 50 },
+    ],
+    extraPrompts: [
+      { label: 'Anthropology 50% OR Archeology 50%', choices: [
+          { name: 'Anthropology', val: 50 },
+          { name: 'Archeology', val: 50 },
+        ], count: 1, label2: 'Pick one:' },
+      { label: 'Foreign Language #1', choices: [{ name: 'Foreign Language', val: 50, spec: true }], count: 1, label2: 'Note: sets Foreign Language skill to 50%' },
+      { label: 'Foreign Language #2', choices: [{ name: 'Foreign Language', val: 30, spec: true }], count: 1, label2: 'Note: sets a second Foreign Language to 30%' },
+    ],
+  },
+  computer_scientist: {
+    name: 'Computer Scientist / Engineer',
+    bonds: 3,
+    desc: '3 bonds. Technical expert in computers, electronics, and signals intelligence.',
+    fixed: [
+      { name: 'Computer Science', val: 60 },
+      { name: 'Craft', val: 30, spec: 'Electrician' },
+      { name: 'Craft', val: 30, spec: 'Mechanic', dedupe: true },
+      { name: 'Craft', val: 40, spec: 'Microelectronics', dedupe: true },
+      { name: 'Science', val: 40, spec: 'Mathematics' },
+      { name: 'SIGINT', val: 40 },
+    ],
+    chooseCount: 4,
+    chooseLabel: 'Choose 4 optional skills',
+    choices: [
+      { name: 'Accounting', val: 50 },
+      { name: 'Bureaucracy', val: 50 },
+      { name: 'Craft', val: 40, spec: true },
+      { name: 'Foreign Language', val: 40, spec: true },
+      { name: 'Heavy Machinery', val: 50 },
+      { name: 'Law', val: 40 },
+      { name: 'Science', val: 40, spec: true },
+    ],
+  },
+  federal_agent: {
+    name: 'Federal Agent',
+    bonds: 3,
+    desc: '3 bonds. Law enforcement professional — FBI, DEA, Marshals, and more.',
+    fixed: [
+      { name: 'Alertness', val: 50 },
+      { name: 'Bureaucracy', val: 40 },
+      { name: 'Criminology', val: 50 },
+      { name: 'Drive', val: 50 },
+      { name: 'Firearms', val: 50 },
+      { name: 'Forensics', val: 30 },
+      { name: 'HUMINT', val: 60 },
+      { name: 'Law', val: 30 },
+      { name: 'Persuade', val: 50 },
+      { name: 'Search', val: 50 },
+      { name: 'Unarmed Combat', val: 60 },
+    ],
+    chooseCount: 1,
+    chooseLabel: 'Choose 1 optional skill',
+    choices: [
+      { name: 'Accounting', val: 60 },
+      { name: 'Computer Science', val: 50 },
+      { name: 'Foreign Language', val: 50, spec: true },
+      { name: 'Heavy Weapons', val: 50 },
+      { name: 'Pharmacy', val: 50 },
+    ],
+  },
+  physician: {
+    name: 'Physician',
+    bonds: 3,
+    desc: '3 bonds. Medical doctor with expertise in diagnosis, drugs, and emergency care.',
+    fixed: [
+      { name: 'Bureaucracy', val: 50 },
+      { name: 'First Aid', val: 60 },
+      { name: 'Medicine', val: 60 },
+      { name: 'Persuade', val: 40 },
+      { name: 'Pharmacy', val: 50 },
+      { name: 'Science', val: 60, spec: 'Biology' },
+      { name: 'Search', val: 40 },
+    ],
+    chooseCount: 2,
+    chooseLabel: 'Choose 2 optional skills',
+    choices: [
+      { name: 'Forensics', val: 50 },
+      { name: 'Psychotherapy', val: 60 },
+      { name: 'Science', val: 50, spec: true },
+      { name: 'Surgery', val: 50 },
+    ],
+  },
+  scientist: {
+    name: 'Scientist',
+    bonds: 4,
+    desc: '4 bonds. Research specialist — biology, physics, chemistry, or any field of science.',
+    fixed: [
+      { name: 'Bureaucracy', val: 40 },
+      { name: 'Computer Science', val: 40 },
+    ],
+    fixedNote: 'Also: Science (choose one) 60%, Science (choose another) 50%, Science (choose another) 50%.',
+    chooseCount: 3,
+    chooseLabel: 'Choose 3 optional skills',
+    choices: [
+      { name: 'Accounting', val: 50 },
+      { name: 'Craft', val: 40, spec: true },
+      { name: 'Foreign Language', val: 40, spec: true },
+      { name: 'Forensics', val: 40 },
+      { name: 'Law', val: 40 },
+      { name: 'Pharmacy', val: 40 },
+    ],
+    scienceSkills: [
+      { val: 60, label: 'Science (primary) 60%' },
+      { val: 50, label: 'Science (secondary) 50%' },
+      { val: 50, label: 'Science (tertiary) 50%' },
+    ],
+  },
+  special_operator: {
+    name: 'Special Operator',
+    bonds: 2,
+    desc: '2 bonds. Elite military — Rangers, Special Forces, Delta Force, SEALs.',
+    fixed: [
+      { name: 'Alertness', val: 60 },
+      { name: 'Athletics', val: 60 },
+      { name: 'Demolitions', val: 40 },
+      { name: 'Firearms', val: 60 },
+      { name: 'Heavy Weapons', val: 50 },
+      { name: 'Melee Weapons', val: 50 },
+      { name: 'Military Science', val: 60, spec: 'Land' },
+      { name: 'Navigate', val: 50 },
+      { name: 'Stealth', val: 50 },
+      { name: 'Survival', val: 50 },
+      { name: 'Swim', val: 50 },
+      { name: 'Unarmed Combat', val: 60 },
+    ],
+    chooseCount: 0,
+    choices: [],
+  },
+};
+
+// Map skill names to their index in the SKILLS array
+function getSkillIndex(name) {
+  return SKILLS.findIndex(s => s.name.toLowerCase() === name.toLowerCase());
+}
+
+function onProfessionChange() {
+  const sel = document.getElementById('profession-select').value;
+  const desc = document.getElementById('profession-desc');
+  if (!sel || !PROFESSIONS[sel]) {
+    desc.textContent = 'Select a profession to pre-populate skill arrays from the rulebook.';
+    return;
+  }
+  const p = PROFESSIONS[sel];
+  desc.textContent = p.desc + (p.fixedNote ? ' ' + p.fixedNote : '');
+}
+
+// State for multi-step apply
+let _profApplyState = null;
+
+function applyProfession() {
+  const sel = document.getElementById('profession-select').value;
+  if (!sel || !PROFESSIONS[sel]) { notify('Select a profession first.'); return; }
+  const prof = PROFESSIONS[sel];
+
+  // Set profession field on sheet
+  const profField = document.getElementById('agent-profession');
+  if (profField && !profField.value) profField.value = prof.name;
+
+  // Apply fixed skills
+  applySkillList(prof.fixed);
+
+  // Set bond count hint (visual only — adjust bond labels)
+  updateBondCountHint(prof.bonds);
+
+  // Scientist has special science skill selection
+  if (sel === 'scientist') {
+    _profApplyState = { prof, step: 'scientist_science', sciIdx: 0 };
+    openScienceChoose(prof, 0);
+    return;
+  }
+
+  // Go to optional skills step or bonus
+  if (prof.chooseCount > 0) {
+    openChooseModal(prof, () => openBonusModal(prof));
+  } else {
+    openBonusModal(prof);
+  }
+}
+
+function applySkillList(skillList) {
+  skillList.forEach(entry => {
+    const idx = getSkillIndex(entry.name);
+    if (idx >= 0) {
+      const el = document.getElementById(`skill-${idx}-val`);
+      if (el) {
+        const cur = parseInt(el.value) || 0;
+        if (entry.val > cur) el.value = entry.val;
+      }
+    }
+  });
+}
+
+function updateBondCountHint(count) {
+  const sec = document.querySelector('#bonds-container')?.closest('[style*="border"]');
+  const bar = sec?.querySelector('.sec-bar');
+  if (bar) {
+    bar.innerHTML = bar.innerHTML.replace(/ \(\d+ bonds?\)/, '');
+    bar.innerHTML += ` <span style="color:#d4a830;font-size:9px;margin-left:8px;">(${count} bonds for this profession)</span>`;
+  }
+}
+
+// ===== CHOOSE MODAL =====
+let _chooseCallback = null;
+let _chooseMax = 0;
+let _chooseSelected = [];
+
+function openChooseModal(prof, callback) {
+  _chooseCallback = callback;
+  _chooseMax = prof.chooseCount;
+  _chooseSelected = [];
+
+  document.getElementById('choose-title').textContent = prof.name + ' — Optional Skills';
+  document.getElementById('choose-instruction').textContent =
+    `Choose exactly ${prof.chooseCount} skill${prof.chooseCount !== 1 ? 's' : ''} from the list below. These represent specialised training beyond your profession's core abilities.`;
+
+  const list = document.getElementById('choose-options-list');
+  list.innerHTML = '';
+  prof.choices.forEach((opt, i) => {
+    const specNote = opt.spec === true ? ' <em style="color:#8b7355;font-size:10px;">(specify)</em>' : (opt.spec ? ` <em style="color:#8b7355;font-size:10px;">(${opt.spec})</em>` : '');
+    list.innerHTML += `
+      <div class="choose-option" onclick="toggleChooseOpt(${i})">
+        <input type="checkbox" id="choose-opt-${i}" onchange="toggleChooseOpt(${i})" onclick="event.stopPropagation()">
+        <label for="choose-opt-${i}">${opt.name}${specNote}</label>
+        <span class="opt-val">${opt.val}%</span>
+      </div>
+    `;
+  });
+
+  updateChooseCount();
+  document.getElementById('choose-overlay').classList.add('show');
+}
+
+function toggleChooseOpt(i) {
+  const cb = document.getElementById(`choose-opt-${i}`);
+  const idx = _chooseSelected.indexOf(i);
+  if (idx >= 0) {
+    _chooseSelected.splice(idx, 1);
+    cb.checked = false;
+  } else {
+    if (_chooseSelected.length >= _chooseMax) {
+      notify(`You can only choose ${_chooseMax} skill${_chooseMax !== 1 ? 's' : ''}.`);
+      cb.checked = false;
+      return;
+    }
+    _chooseSelected.push(i);
+    cb.checked = true;
+  }
+  updateChooseCount();
+}
+
+function updateChooseCount() {
+  const el = document.getElementById('choose-count-display');
+  const remaining = _chooseMax - _chooseSelected.length;
+  if (remaining > 0) {
+    el.textContent = `${remaining} more selection${remaining !== 1 ? 's' : ''} needed`;
+    el.style.color = 'var(--red-stamp)';
+  } else {
+    el.textContent = '✓ All selections made';
+    el.style.color = 'var(--green-light)';
+  }
+}
+
+function cancelChoose() {
+  document.getElementById('choose-overlay').classList.remove('show');
+  _chooseCallback = null;
+}
+
+function confirmChoose() {
+  if (_chooseSelected.length < _chooseMax) {
+    notify(`Please choose ${_chooseMax - _chooseSelected.length} more skill${_chooseMax - _chooseSelected.length !== 1 ? 's' : ''}.`);
+    return;
+  }
+  const prof = PROFESSIONS[document.getElementById('profession-select').value];
+  _chooseSelected.forEach(i => {
+    const opt = prof.choices[i];
+    const skillIdx = getSkillIndex(opt.name);
+    if (skillIdx >= 0) {
+      const el = document.getElementById(`skill-${skillIdx}-val`);
+      if (el) {
+        const cur = parseInt(el.value) || 0;
+        if (opt.val > cur) el.value = opt.val;
+      }
+    }
+  });
+  document.getElementById('choose-overlay').classList.remove('show');
+  if (_chooseCallback) { const cb = _chooseCallback; _chooseCallback = null; cb(); }
+}
+
+// Scientist science skill selection (3 separate picks)
+function openScienceChoose(prof, sciIdx) {
+  const sci = prof.scienceSkills[sciIdx];
+  document.getElementById('choose-title').textContent = `Scientist — ${sci.label}`;
+  document.getElementById('choose-instruction').textContent =
+    `Choose one field of science for this skill slot (${sci.val}%). You may specialise however you like.`;
+
+  const scienceFields = ['Astronomy', 'Biology', 'Chemistry', 'Forensics', 'Geology', 'Mathematics',
+    'Medicine', 'Meteorology', 'Neuroscience', 'Physics', 'Psychology', 'Zoology', 'Other (specify)'];
+
+  const list = document.getElementById('choose-options-list');
+  list.innerHTML = '';
+  scienceFields.forEach((field, i) => {
+    list.innerHTML += `
+      <div class="choose-option" onclick="toggleSciOpt(${i}, '${field}', ${sci.val}, ${sciIdx}, ${prof.scienceSkills.length})">
+        <input type="checkbox" id="choose-opt-${i}" onclick="event.stopPropagation()">
+        <label for="choose-opt-${i}">${field}</label>
+        <span class="opt-val">${sci.val}%</span>
+      </div>
+    `;
+  });
+
+  document.getElementById('choose-count-display').textContent = 'Pick one field of science.';
+  document.getElementById('choose-overlay').classList.add('show');
+  _chooseMax = 1;
+  _chooseSelected = [];
+}
+
+function toggleSciOpt(i, field, val, sciIdx, total) {
+  // Clear others
+  document.querySelectorAll('#choose-options-list input[type=checkbox]').forEach(cb => cb.checked = false);
+  document.getElementById(`choose-opt-${i}`).checked = true;
+
+  // Apply to Science skill
+  const sciIdx2 = getSkillIndex('Science');
+  if (sciIdx2 >= 0) {
+    const el = document.getElementById(`skill-${sciIdx2}-val`);
+    if (el) { const cur = parseInt(el.value)||0; if (val > cur) el.value = val; }
+  }
+
+  document.getElementById('choose-overlay').classList.remove('show');
+
+  const prof = PROFESSIONS[document.getElementById('profession-select').value];
+  const nextSci = sciIdx + 1;
+  if (nextSci < total) {
+    setTimeout(() => openScienceChoose(prof, nextSci), 200);
+  } else {
+    // Move to optional skills
+    if (prof.chooseCount > 0) {
+      setTimeout(() => openChooseModal(prof, () => openBonusModal(prof)), 200);
+    } else {
+      setTimeout(() => openBonusModal(prof), 200);
+    }
+  }
+}
+
+// ===== BONUS SKILLS MODAL =====
+let _bonusSelected = [];
+const BONUS_MAX = 8;
+const BONUS_AMT = 20;
+const BONUS_CAP = 80;
+
+function openBonusModal(prof) {
+  _bonusSelected = [];
+  document.getElementById('bonus-remaining').textContent = `${BONUS_MAX} selections remaining`;
+
+  const list = document.getElementById('bonus-skills-list');
+  list.innerHTML = '';
+  SKILLS.forEach((skill, idx) => {
+    const curEl = document.getElementById(`skill-${idx}-val`);
+    const cur = parseInt(curEl?.value) || skill.base;
+    const newVal = Math.min(cur + BONUS_AMT, BONUS_CAP);
+    const specNote = skill.spec ? ' *' : '';
+    list.innerHTML += `
+      <div class="bonus-skill-row" onclick="toggleBonus(${idx})">
+        <input type="checkbox" id="bonus-${idx}" onclick="event.stopPropagation()">
+        <label for="bonus-${idx}">${skill.name}${specNote}</label>
+        <span class="cur-val">${cur}%</span>
+        <span style="font-size:10px;color:#8b7355;margin:0 4px;">→</span>
+        <span class="new-val" id="bonus-new-${idx}">${cur}%</span>
+      </div>
+    `;
+  });
+
+  document.getElementById('bonus-overlay').classList.add('show');
+}
+
+function toggleBonus(idx) {
+  const cb = document.getElementById(`bonus-${idx}`);
+  const pos = _bonusSelected.indexOf(idx);
+  if (pos >= 0) {
+    _bonusSelected.splice(pos, 1);
+    cb.checked = false;
+    refreshBonusNew(idx, false);
+  } else {
+    if (_bonusSelected.length >= BONUS_MAX) {
+      notify(`You can only choose ${BONUS_MAX} bonus skills.`);
+      cb.checked = false;
+      return;
+    }
+    _bonusSelected.push(idx);
+    cb.checked = true;
+    refreshBonusNew(idx, true);
+  }
+  const rem = BONUS_MAX - _bonusSelected.length;
+  document.getElementById('bonus-remaining').textContent =
+    rem > 0 ? `${rem} selection${rem !== 1 ? 's' : ''} remaining` : '✓ All 8 bonus skills chosen';
+}
+
+function refreshBonusNew(idx, adding) {
+  const curEl = document.getElementById(`skill-${idx}-val`);
+  const cur = parseInt(curEl?.value) || SKILLS[idx].base;
+  const bonus = adding ? BONUS_AMT : 0;
+  const newVal = Math.min(cur + bonus, BONUS_CAP);
+  const el = document.getElementById(`bonus-new-${idx}`);
+  if (el) {
+    el.textContent = newVal + '%';
+    el.style.color = adding ? 'var(--green-light)' : '#6a5c40';
+  }
+}
+
+function cancelBonus() {
+  document.getElementById('bonus-overlay').classList.remove('show');
+  saveToState();
+  notify('Profession applied. Bonus skills skipped — add +20% manually if needed.');
+}
+
+function confirmBonus() {
+  _bonusSelected.forEach(idx => {
+    const el = document.getElementById(`skill-${idx}-val`);
+    if (el) {
+      const cur = parseInt(el.value) || SKILLS[idx].base;
+      el.value = Math.min(cur + BONUS_AMT, BONUS_CAP);
+    }
+  });
+  document.getElementById('bonus-overlay').classList.remove('show');
+  saveToState();
+  notify(`✓ Profession + bonus skills applied. Customize further as needed.`);
 }
 
 // ===== NOTIFY =====
